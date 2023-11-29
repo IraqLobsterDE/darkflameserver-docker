@@ -1,3 +1,4 @@
-client-files/res
-client-files/locale
+client-files/*
+server/
+.env
 config
