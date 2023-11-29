@@ -11,20 +11,10 @@ RUN DEBIAN_FRONTEND="noninteractive" && \
 RUN git clone --recursive https://github.com/DarkflameUniverse/DarkflameServer.git
 RUN mkdir -p /server; 
 WORKDIR /server
-RUN cmake /DarkflameServer/
-RUN make -j$(grep -c '^processor' /proc/cpuinfo)
+RUN ./build.sh -j$(grep -c '^processor' /proc/cpuinfo)
 
 # Copy client files&dirs into the container (need to be in client-files/ dir next to Dockerfile)
 COPY client-files/ ./
-
-# Copy aside database initialization scripts for automatic database initialization
-RUN cp -r /DarkflameServer/migrations/dlu /db-init
-
-
-# Set up CDServer DB
-RUN python3 -m utils.fdb_to_sqlite res/cdclient.fdb --sqlite_path res/CDServer.sqlite
-RUN for file in /DarkflameServer/migrations/cdserver/*; do cat $file | sqlite3 res/CDServer.sqlite ; done
-RUN rm -f res/cdclient.fdb
 
 # Clean up the image
 RUN apt-get -y remove zlib1g-dev python3 python3-pip sqlite gcc cmake git make g++ libssl-dev
