@@ -5,10 +5,10 @@ RUN apt update && apt upgrade -y
 
 # Install build packages
 RUN DEBIAN_FRONTEND="noninteractive" && \
-  apt-get install -y build-essential gcc zlib1g-dev libssl-dev openssl mariadb-server cmake
+  apt-get install -y git build-essential gcc zlib1g-dev libssl-dev openssl mariadb-server cmake
 
 # Build the DLU Server
-RUN git clone --recursive https://github.com/DarkflameUniverse/DarkflameServer
+RUN git clone --recursive https://github.com/DarkflameUniverse/DarkflameServer.git
 WORKDIR /DarkflameServer
 RUN ./build.sh -j$(grep -c '^processor' /proc/cpuinfo)
 
