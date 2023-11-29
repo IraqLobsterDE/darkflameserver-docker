@@ -22,6 +22,7 @@ RUN apt-get -y autoremove
 # Create the default config files and link to the config folder. start.sh will copy the default configs to the config folder if they don't exist already
 RUN mkdir /config
 RUN mkdir /default-config
+WORKDIR /DarkflameServer/build
 RUN mv *.ini  /default-config/
 RUN for file in /default-config/*.ini; do ln -s /config/$(basename $file) . ; done
 # Disable unnecessary sudo auth 
