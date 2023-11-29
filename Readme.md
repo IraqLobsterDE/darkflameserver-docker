@@ -103,21 +103,6 @@ docker run \
 version: "2.2"
 services:
 # Darkflame LEGO Universe server
-# Database
-  darkflameserver-db:
-    image: mariadb
-    container_name: darkflameserver-db
-    command: --default-authentication-plugin=mysql_native_password
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: "MySecretRootPW"
-    volumes:
-      -  ${MY_DATABASE_FOLDER}:/var/lib/mysql
-    networks:
-      darkflameserver-net:
-    ports:
-      - 3306:3306/tcp
-
 # Server
   darkflameserver:
     image: darkflameserver
