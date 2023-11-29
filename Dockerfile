@@ -1,14 +1,11 @@
 FROM ubuntu
 
 # Install required packages
-RUN apt-get update
-RUN apt-get -y install mysql-client
+RUN apt update && apt upgrade -y
 
 # Install build packages
 RUN DEBIAN_FRONTEND="noninteractive" && \
-  apt remove -y libmysqlcppconn7v5 libmysqlcppconn-dev && \
-  apt-get install -y gcc cmake git make g++ zlib1g-dev python3 python3-pip sqlite libssl-dev 
-RUN pip3 install git+https://github.com/lcdr/utils
+  apt-get install -y build-essential gcc zlib1g-dev libssl-dev openssl mariadb-server cmake
 
 # Build the DLU Server
 RUN git clone --recursive https://github.com/DarkflameUniverse/DarkflameServer.git
