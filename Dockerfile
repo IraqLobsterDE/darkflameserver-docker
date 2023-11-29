@@ -1,23 +1,19 @@
 FROM ubuntu
 
 # Install required packages
-RUN apt update && apt upgrade -y
+RUN apt -y update && apt upgrade 
 
 # Install build packages
-RUN DEBIAN_FRONTEND="noninteractive" && \
-  apt-get install -y git build-essential gcc zlib1g-dev libssl-dev openssl mariadb-server cmake
+RUN apt -y install git build-essential gcc zlib1g-dev libssl-dev openssl cmake
 
 # Build the DLU Server
 RUN git clone --recursive https://github.com/DarkflameUniverse/DarkflameServer.git
 WORKDIR /DarkflameServer
 RUN ./build.sh -j$(grep -c '^processor' /proc/cpuinfo)
 
-# Copy client files&dirs into the container (need to be in client-files/ dir next to Dockerfile)
-COPY client-files/ ./
-
 # Clean up the image
-RUN apt-get -y remove zlib1g-dev python3 python3-pip sqlite gcc cmake git make g++ libssl-dev
-RUN apt-get -y autoremove
+RUN apt -y remove git gcc zlib1g-dev libssl-dev cmake
+RUN apt -y autoremove
 
 # Create the default config files and link to the config folder. start.sh will copy the default configs to the config folder if they don't exist already
 RUN mkdir /config
@@ -36,4 +32,3 @@ RUN mkdir -p /server/logs
 # Set the start script as entrypoint
 COPY start.sh start.sh
 ENTRYPOINT [ "/bin/bash", "/server/start.sh" ]
-
