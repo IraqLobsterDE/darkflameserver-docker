@@ -1,7 +1,7 @@
 FROM ubuntu
 
 # Install required packages
-RUN apt -y update && apt upgrade 
+RUN apt update && apt upgrade -y 
 
 # Install build packages
 RUN apt -y install git build-essential gcc zlib1g-dev libssl-dev openssl cmake
