@@ -16,7 +16,7 @@ else
 fi
 
 # Set mysql config parameters based on evironment variables
-for file in /config/masterconfig.ini; do
+for file in /DarkflameServer/build/masterconfig.ini; do
     sed -i "s/mysql_host.*/mysql_host=$MYSQL_HOST/g" $file
     sed -i "s/mysql_database.*/mysql_database=$MYSQL_DATABASE/g" $file
     sed -i "s/mysql_username.*/mysql_username=$MYSQL_USERNAME/g" $file
