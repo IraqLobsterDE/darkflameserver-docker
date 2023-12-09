@@ -15,6 +15,7 @@ RUN ./build.sh -j$(grep -c '^processor' /proc/cpuinfo)
 # Clean up the image
 RUN apt -y remove git gcc zlib1g-dev libssl-dev cmake
 RUN apt -y autoremove
+RUN setcap 'cap_net_bind_service=+ep' AuthServer
 
 # Set the start script as entrypoint
 COPY /start.sh /DarkflameServer/start.sh
