@@ -4,7 +4,7 @@ FROM ubuntu
 RUN apt update && apt upgrade -y 
 
 # Install build packages
-RUN apt -y install git build-essential gcc zlib1g-dev libssl-dev openssl cmake libcap2
+RUN apt -y install git build-essential gcc zlib1g-dev libssl-dev openssl cmake libcap2-bin
 
 RUN setcap CAP_NET_BIND_SERVICE=+ep AuthServer
 
