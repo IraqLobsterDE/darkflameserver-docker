@@ -1,6 +1,6 @@
 #!/bin/bash
 # Exit on error
-sudo setcap 'cap_net_bind_service=+ep' AuthServer
+setcap 'cap_net_bind_service=+ep' AuthServer
 # Set mysql config parameters based on evironment variables
 for file in /DarkflameServer/build/sharedconfig.ini; do
     sed -i "s/mysql_host.*/mysql_host=$MYSQL_HOST/g" $file
