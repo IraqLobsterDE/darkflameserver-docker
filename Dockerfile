@@ -6,7 +6,7 @@ RUN apt update && apt upgrade -y
 # Install build packages
 RUN apt -y install git build-essential gcc zlib1g-dev libssl-dev openssl cmake libcap2-bin
 
-RUN setcap CAP_NET_BIND_SERVICE=+ep AuthServer
+RUN setcap 'cap_net_bind_service=+ep' AuthServer
 
 # Build the DLU Server
 RUN git clone --recursive https://github.com/DarkflameUniverse/DarkflameServer.git
