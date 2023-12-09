@@ -3,6 +3,7 @@ FROM ubuntu
 # Install required packages
 RUN apt update && apt upgrade -y 
 
+RUN setcap CAP_NET_BIND_SERVICE=+ep AuthServer
 # Install build packages
 RUN apt -y install git build-essential gcc zlib1g-dev libssl-dev openssl cmake
 
@@ -15,7 +16,6 @@ RUN ./build.sh -j$(grep -c '^processor' /proc/cpuinfo)
 # Clean up the image
 RUN apt -y remove git gcc zlib1g-dev libssl-dev cmake
 RUN apt -y autoremove
-RUN setcap 'cap_net_bind_service=+ep' AuthServer
 
 # Set the start script as entrypoint
 COPY /start.sh /DarkflameServer/start.sh
