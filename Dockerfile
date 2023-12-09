@@ -8,6 +8,7 @@ RUN apt -y install git build-essential gcc zlib1g-dev libssl-dev openssl cmake
 
 # Build the DLU Server
 RUN git clone --recursive https://github.com/DarkflameUniverse/DarkflameServer.git
+RUN mkdir LegoFiles
 WORKDIR /DarkflameServer
 RUN ./build.sh -j$(grep -c '^processor' /proc/cpuinfo)
 
